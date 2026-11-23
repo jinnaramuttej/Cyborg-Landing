@@ -1,13 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 export default function QuotePanel() {
   return (
-    <motion.aside
-      initial={{ opacity: 0, x: 25 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="relative z-30 flex flex-col justify-between w-full max-w-[200px] lg:max-w-[220px] p-6 lg:p-7 bg-[#080808]/60 backdrop-blur-md border border-[#D00016]/40 hover:border-[#D00016]/75 transition-all duration-300"
+    <aside
+      className="relative z-30 flex flex-col justify-between w-full max-w-[200px] lg:max-w-[220px] p-6 lg:p-7 bg-[#080808]/60 backdrop-blur-md border border-[#D00016]/40 hover:border-[#D00016]/75 transition-all duration-300 select-none shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
     >
       {/* Top Left Red Quotation Mark */}
       <div className="text-2xl lg:text-3xl font-serif text-[#D00016] leading-none mb-4 font-black select-none opacity-90">
@@ -38,6 +34,6 @@ export default function QuotePanel() {
       <div className="text-2xl lg:text-3xl font-serif text-[#D00016] leading-none mt-4 text-right font-black select-none opacity-90">
         ”
       </div>
-    </motion.aside>
+    </aside>
   );
 }
