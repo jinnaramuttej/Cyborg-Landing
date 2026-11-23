@@ -1,42 +1,185 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function CinematicStage() {
-  const { scrollYProgress } = useScroll();
+  const containerRef = useRef(null);
+  
+  // Scene Layer Refs
+  const heroLayerRef = useRef(null);
+  const heroCharRef = useRef(null);
+  const haloRef = useRef(null);
+  const fogRef = useRef(null);
+  
+  const visionLayerRef = useRef(null);
+  const evolutionLayerRef = useRef(null);
+  const humanityLayerRef = useRef(null);
+  const perfectionLayerRef = useRef(null);
 
-  // ================= SCROLL-LINKED CROSSFADE OPACITIES =================
-  // Chapter 01: Hero / The Creation (0.00 - 0.22)
-  const heroOpacity = useTransform(scrollYProgress, [0.00, 0.12, 0.22], [1.0, 1.0, 0.0]);
-  const heroScale = useTransform(scrollYProgress, [0.00, 0.22], [1.0, 1.04]);
-  const heroCharOpacity = useTransform(scrollYProgress, [0.00, 0.10, 0.22], [1.0, 0.9, 0.0]);
-  const heroCharScale = useTransform(scrollYProgress, [0.00, 0.22], [1.0, 0.88]);
-  const heroCharY = useTransform(scrollYProgress, [0.00, 0.22], [0, -25]);
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
 
-  // Chapter 02: The Vision / Metropolis (0.12 - 0.42)
-  const visionOpacity = useTransform(scrollYProgress, [0.12, 0.22, 0.32, 0.42], [0.0, 1.0, 1.0, 0.0]);
-  const visionScale = useTransform(scrollYProgress, [0.12, 0.42], [1.04, 1.0]);
+      // ================= 1. AMBIENT LIVING STAGE TWEENS =================
+      if (haloRef.current) {
+        gsap.to(haloRef.current, {
+          scale: 1.06,
+          opacity: 0.45,
+          duration: 3.6,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
 
-  // Chapter 03: Evolution / The Invasion (0.32 - 0.62)
-  const evolutionOpacity = useTransform(scrollYProgress, [0.32, 0.42, 0.52, 0.62], [0.0, 1.0, 1.0, 0.0]);
-  const evolutionScale = useTransform(scrollYProgress, [0.32, 0.62], [1.04, 1.0]);
+      if (fogRef.current) {
+        gsap.to(fogRef.current, {
+          opacity: 0.35,
+          scale: 1.08,
+          duration: 4.8,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
 
-  // Chapter 04: Humanity / The Creators (0.52 - 0.82)
-  const humanityOpacity = useTransform(scrollYProgress, [0.52, 0.62, 0.72, 0.82], [0.0, 1.0, 1.0, 0.0]);
-  const humanityScale = useTransform(scrollYProgress, [0.52, 0.82], [1.04, 1.0]);
+      // ================= 2. DESKTOP & STANDARD MOTION CHOREOGRAPHY =================
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // Explicit initial states: Hero layer is 100% active, all others are 0
+        gsap.set(heroLayerRef.current, { opacity: 1 });
+        gsap.set(heroCharRef.current, { opacity: 1, scale: 1, y: 0 });
+        gsap.set(visionLayerRef.current, { opacity: 0, scale: 1.05 });
+        gsap.set(evolutionLayerRef.current, { opacity: 0, scale: 1.05 });
+        gsap.set(humanityLayerRef.current, { opacity: 0, scale: 1.04 });
+        gsap.set(perfectionLayerRef.current, { opacity: 0, scale: 1.03 });
 
-  // Chapter 05: The Age of Perfection (0.72 - 1.00)
-  const perfectionOpacity = useTransform(scrollYProgress, [0.72, 0.82, 1.00], [0.0, 1.0, 1.0]);
-  const perfectionScale = useTransform(scrollYProgress, [0.72, 1.00], [1.03, 1.0]);
+        // MASTER CONTINUOUS STORYTELLING TIMELINE
+        // Seamlessly scrubs across the entire 5-chapter narrative
+        const masterTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: document.body,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1,
+            invalidateOnRefresh: true
+          }
+        });
+
+        masterTl
+          // ---------------- CHAPTER 01 -> CHAPTER 02 (Hero -> Vision) ----------------
+          // Camera pulls back, hero cyborg gracefully scales down and dissolves as metropolis emerges
+          .to(heroCharRef.current, {
+            scale: 0.85,
+            y: -35,
+            opacity: 0,
+            ease: 'power1.inOut',
+            duration: 1
+          }, 0)
+          .to(heroLayerRef.current, {
+            opacity: 0,
+            ease: 'power1.inOut',
+            duration: 1
+          }, 0)
+          .to(visionLayerRef.current, {
+            opacity: 1,
+            scale: 1.0,
+            ease: 'power1.inOut',
+            duration: 1
+          }, 0)
+
+          // ---------------- CHAPTER 02 -> CHAPTER 03 (Vision -> Evolution) ----------------
+          // Sunset metropolis dims into dark, smoke-filled war environment with commander
+          .to(visionLayerRef.current, {
+            opacity: 0,
+            scale: 0.96,
+            ease: 'power1.inOut',
+            duration: 1
+          }, 1)
+          .to(evolutionLayerRef.current, {
+            opacity: 1,
+            scale: 1.0,
+            ease: 'power1.inOut',
+            duration: 1
+          }, 1)
+
+          // ---------------- CHAPTER 03 -> CHAPTER 04 (Evolution -> Humanity) ----------------
+          // War scene dissolves into quiet, clinical cyan/teal lab of Dr. Vance & Elena
+          .to(evolutionLayerRef.current, {
+            opacity: 0,
+            scale: 0.96,
+            ease: 'power1.inOut',
+            duration: 1
+          }, 2)
+          .to(humanityLayerRef.current, {
+            opacity: 1,
+            scale: 1.0,
+            ease: 'power1.inOut',
+            duration: 1
+          }, 2)
+
+          // ---------------- CHAPTER 04 -> CHAPTER 05 (Humanity -> Perfection Army) ----------------
+          // Lab memory fades into grand marching army panorama with stormy sky extension
+          .to(humanityLayerRef.current, {
+            opacity: 0,
+            scale: 0.96,
+            ease: 'power1.inOut',
+            duration: 1
+          }, 3)
+          .to(perfectionLayerRef.current, {
+            opacity: 1,
+            scale: 1.0,
+            ease: 'power1.inOut',
+            duration: 1
+          }, 3);
+      });
+
+      // ================= 3. REDUCED MOTION FALLBACK =================
+      mm.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set(heroLayerRef.current, { opacity: 1 });
+        gsap.set(heroCharRef.current, { opacity: 1 });
+        gsap.set(visionLayerRef.current, { opacity: 0 });
+        gsap.set(evolutionLayerRef.current, { opacity: 0 });
+        gsap.set(humanityLayerRef.current, { opacity: 0 });
+        gsap.set(perfectionLayerRef.current, { opacity: 0 });
+
+        const reducedTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: document.body,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.5
+          }
+        });
+
+        reducedTl
+          .to(heroCharRef.current, { opacity: 0, duration: 1 }, 0)
+          .to(heroLayerRef.current, { opacity: 0, duration: 1 }, 0)
+          .to(visionLayerRef.current, { opacity: 1, duration: 1 }, 0)
+          .to(visionLayerRef.current, { opacity: 0, duration: 1 }, 1)
+          .to(evolutionLayerRef.current, { opacity: 1, duration: 1 }, 1)
+          .to(evolutionLayerRef.current, { opacity: 0, duration: 1 }, 2)
+          .to(humanityLayerRef.current, { opacity: 1, duration: 1 }, 2)
+          .to(humanityLayerRef.current, { opacity: 0, duration: 1 }, 3)
+          .to(perfectionLayerRef.current, { opacity: 1, duration: 1 }, 3);
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#080808] select-none">
-      
+    <div 
+      ref={containerRef}
+      className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#080808] select-none"
+    >
       {/* ================= SHARED PERSISTENT ENVIRONMENT STAGE ================= */}
       
       {/* LAYER 5: CHAPTER 05 — THE AGE OF PERFECTION (FINALE ARMY) */}
-      <motion.div 
-        style={{ opacity: perfectionOpacity, scale: perfectionScale }}
-        className="absolute inset-0 w-full h-full will-change-transform"
+      <div 
+        ref={perfectionLayerRef}
+        className="absolute inset-0 w-full h-full will-change-transform opacity-0"
       >
         <img
           src="/assets/robot_army_perfection.png"
@@ -48,47 +191,47 @@ export default function CinematicStage() {
           className="absolute inset-0 bg-cover bg-top opacity-60 mix-blend-screen pointer-events-none"
           style={{ backgroundImage: `url('/assets/finale_atmosphere_extension.png')` }}
         />
-      </motion.div>
+      </div>
 
       {/* LAYER 4: CHAPTER 04 — HUMANITY (DR. VANCE & ELENA REYES) */}
-      <motion.div 
-        style={{ opacity: humanityOpacity, scale: humanityScale }}
-        className="absolute inset-0 w-full h-full will-change-transform"
+      <div 
+        ref={humanityLayerRef}
+        className="absolute inset-0 w-full h-full will-change-transform opacity-0"
       >
         <img
           src="/assets/humanity_final.png"
           alt="Dr. Aaron Vance and Elena Reyes - Humanity Interaction"
           className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-[0.95]"
         />
-      </motion.div>
+      </div>
 
       {/* LAYER 3: CHAPTER 03 — EVOLUTION (THE INVASION & COMMANDER) */}
-      <motion.div 
-        style={{ opacity: evolutionOpacity, scale: evolutionScale }}
-        className="absolute inset-0 w-full h-full will-change-transform"
+      <div 
+        ref={evolutionLayerRef}
+        className="absolute inset-0 w-full h-full will-change-transform opacity-0"
       >
         <img
           src="/assets/evolution_final.png"
           alt="NEXUS Cybernetic Evolution Commander in Ruined Megacity"
           className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-[0.95]"
         />
-      </motion.div>
+      </div>
 
       {/* LAYER 2: CHAPTER 02 — THE VISION (SUNSET METROPOLIS & PORTAL RING) */}
-      <motion.div 
-        style={{ opacity: visionOpacity, scale: visionScale }}
-        className="absolute inset-0 w-full h-full will-change-transform"
+      <div 
+        ref={visionLayerRef}
+        className="absolute inset-0 w-full h-full will-change-transform opacity-0"
       >
         <img
           src="/assets/vision_city_master.png"
           alt="NEXUS Metropolis Matrix with Horizon Portal Ring"
           className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-[0.95]"
         />
-      </motion.div>
+      </div>
 
       {/* LAYER 1: CHAPTER 01 — HERO ENVIRONMENT (DARK CHAMBER & AMBIENT CITY) */}
-      <motion.div 
-        style={{ opacity: heroOpacity, scale: heroScale }}
+      <div 
+        ref={heroLayerRef}
         className="absolute inset-0 w-full h-full will-change-transform"
       >
         {/* Distant Cyber City Skyline Silhouette at Bottom Right */}
@@ -103,6 +246,7 @@ export default function CinematicStage() {
 
         {/* Luminous Red Energy Halo behind character */}
         <div 
+          ref={haloRef}
           className="absolute right-[8%] sm:right-[14%] lg:right-[18%] xl:right-[20%] top-[43%] -translate-y-1/2 w-[300px] sm:w-[420px] md:w-[480px] lg:w-[540px] h-[300px] sm:h-[420px] md:h-[480px] lg:h-[540px] rounded-full pointer-events-none"
           style={{
             border: '1.5px solid rgba(208, 0, 22, 0.45)',
@@ -113,20 +257,17 @@ export default function CinematicStage() {
 
         {/* Atmospheric Red Fog Glow */}
         <div 
+          ref={fogRef}
           className="absolute right-[10%] lg:right-[18%] top-[45%] -translate-y-1/2 w-[450px] sm:w-[600px] lg:w-[750px] h-[450px] sm:h-[600px] lg:h-[750px] rounded-full pointer-events-none filter blur-[100px] opacity-25"
           style={{
             background: 'radial-gradient(circle, #D00016 0%, rgba(140,0,16,0.4) 45%, transparent 70%)'
           }}
         />
-      </motion.div>
+      </div>
 
       {/* FOREGROUND HERO CYBORG (PULLS BACK AND DISSOLVES INTO VISION METROPOLIS) */}
-      <motion.div
-        style={{
-          opacity: heroCharOpacity,
-          scale: heroCharScale,
-          y: heroCharY
-        }}
+      <div
+        ref={heroCharRef}
         className="absolute right-0 bottom-0 top-0 w-full sm:w-[75%] md:w-[62%] lg:w-[54%] xl:w-[50%] h-full flex items-end justify-center pointer-events-none z-10 will-change-transform"
       >
         <picture className="h-full w-full max-h-[77vh] flex items-end justify-center">
@@ -137,7 +278,7 @@ export default function CinematicStage() {
             className="h-full w-auto max-h-[77vh] object-contain object-bottom filter contrast-[1.08] brightness-[1.0] drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
           />
         </picture>
-      </motion.div>
+      </div>
 
       {/* ================= PERSISTENT CINEMATIC VIGNETTE & FILM GRADE ================= */}
       {/* Soft left vignette to guarantee text legibility without blocking art */}
@@ -148,9 +289,7 @@ export default function CinematicStage() {
         }}
       />
       {/* Subtle screen edge framing */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#080808]/70 to-transparent pointer-events-none z-20" />
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#080808]/80 to-transparent pointer-events-none z-20" />
-
+      <div className="absolute inset-0 pointer-events-none z-20 shadow-[inset_0_0_120px_rgba(8,8,8,0.95)]" />
     </div>
   );
 }
