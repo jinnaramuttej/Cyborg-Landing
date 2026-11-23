@@ -72,10 +72,10 @@ export default function HumanitySection() {
     >
       {/* ================= UPPER SECTION: HEADLINE IN NEGATIVE SPACE ================= */}
       <div className="relative w-full max-w-[1740px] mx-auto px-6 sm:px-12 lg:px-20 xl:px-24 z-20 pt-2 sm:pt-4">
-        <div className="max-w-xl">
+        <div className="max-w-2xl mx-auto text-center">
           <div
             ref={tagRef}
-            className="flex items-center gap-2 font-mono text-xs tracking-[0.25em] mb-3 uppercase select-none"
+            className="flex items-center justify-center gap-2 font-mono text-xs tracking-[0.25em] mb-3 uppercase select-none"
           >
             <span className="text-[#D00016] font-bold">[</span>
             <span className="text-[#999999]">CHRONICLES</span>
@@ -86,7 +86,7 @@ export default function HumanitySection() {
 
           <h2
             ref={headlineRef}
-            className="hero-headline text-3xl sm:text-5xl lg:text-[3.2rem] xl:text-[3.6rem] leading-[0.92] tracking-tight mb-3 font-raiko overflow-hidden"
+            className="hero-headline text-2xl sm:text-4xl lg:text-[3rem] xl:text-[3.3rem] leading-[0.92] tracking-tight mb-2.5 font-raiko overflow-hidden"
           >
             <span className="inline-block overflow-hidden mr-3">
               <span className="humanity-word inline-block text-[#F1F0ED] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
@@ -102,7 +102,7 @@ export default function HumanitySection() {
 
           <p
             ref={paraRef}
-            className="text-sm sm:text-base font-mono text-[#999999] leading-relaxed max-w-md font-normal"
+            className="text-xs sm:text-sm lg:text-base font-mono text-[#CCCCCC] leading-relaxed max-w-lg mx-auto font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
           >
             Before the legion marched, there was a creator who envisioned peace, and the human bond that warned him of what perfection must destroy.
           </p>

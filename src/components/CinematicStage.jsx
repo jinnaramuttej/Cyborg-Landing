@@ -109,13 +109,10 @@ export default function CinematicStage() {
         <img
           src="/assets/robot_army_perfection.png"
           alt="NEXUS Legion of Perfection"
-          className="w-full h-full object-cover object-bottom filter contrast-[1.08] brightness-[0.92]"
+          className="w-full h-full object-cover object-[62%_center] sm:object-center filter contrast-[1.05] brightness-[0.98]"
         />
-        {/* Sky atmosphere blend */}
-        <div 
-          className="absolute inset-0 bg-cover bg-top opacity-60 mix-blend-screen pointer-events-none"
-          style={{ backgroundImage: `url('/assets/finale_atmosphere_extension.png')` }}
-        />
+        {/* Subtle left gradient for negative space typography readability */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#080808]/85 via-[#080808]/40 to-transparent w-full md:w-[55%]" />
       </div>
 
       {/* LAYER 4: CHAPTER 04 — HUMANITY (DR. VANCE & ELENA REYES) */}
@@ -126,8 +123,12 @@ export default function CinematicStage() {
         <img
           src="/assets/humanity_final.png"
           alt="Dr. Aaron Vance and Elena Reyes - Humanity Interaction"
-          className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-[0.95]"
+          className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-[0.98]"
         />
+        {/* Subtle top gradient for centered header text negative space */}
+        <div className="absolute inset-x-0 top-0 h-[38%] pointer-events-none bg-gradient-to-b from-[#080808]/85 via-[#080808]/25 to-transparent" />
+        {/* Subtle bottom gradient for subtitle cards */}
+        <div className="absolute inset-x-0 bottom-0 h-[28%] pointer-events-none bg-gradient-to-t from-[#080808]/85 via-[#080808]/30 to-transparent" />
       </div>
 
       {/* LAYER 3: CHAPTER 03 — EVOLUTION (THE INVASION & COMMANDER) */}
@@ -138,8 +139,10 @@ export default function CinematicStage() {
         <img
           src="/assets/evolution_final.png"
           alt="NEXUS Cybernetic Evolution Commander in Ruined Megacity"
-          className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-[0.95]"
+          className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-[0.98]"
         />
+        {/* Subtle left gradient for typography readability */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#080808]/85 via-[#080808]/40 to-transparent w-full md:w-[55%]" />
       </div>
 
       {/* LAYER 2: CHAPTER 02 — THE VISION (SUNSET METROPOLIS & PORTAL RING) */}
@@ -150,8 +153,10 @@ export default function CinematicStage() {
         <img
           src="/assets/vision_city_master.png"
           alt="NEXUS Metropolis Matrix with Horizon Portal Ring"
-          className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-[0.95]"
+          className="w-full h-full object-cover object-[65%_center] sm:object-center filter contrast-[1.05] brightness-[0.98]"
         />
+        {/* Subtle left gradient for typography readability */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#080808]/85 via-[#080808]/40 to-transparent w-full md:w-[55%]" />
       </div>
 
       {/* LAYER 1: CHAPTER 01 — HERO SCENE (THE CREATION: ULTRON IN RED HALO OVER CRIMSON MEGACITY) */}
