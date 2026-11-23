@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================= RAIKO DISPLAY TYPEFACE LOCK ================= */
+@font-face {
+  font-family: 'Raiko';
+  src: url('/fonts/raiko.otf') format('opentype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --bg-primary: #080808;
+    --accent-crimson: #D00016;
+    --accent-dark: #8C0010;
+    --text-primary: #F1F0ED;
+    --text-muted: #999999;
+    --border-crimson: rgba(200, 0, 20, 0.35);
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+}
+
+/* Heavy Geometric Display Headline (Locked to RAIKO) */
+.hero-headline {
+  font-family: 'Raiko', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.hero-headline span {
+  display: block;
+}
+
+/* Major Section Heading Typography (Locked to RAIKO) */
+.section-headline {
+  font-family: 'Raiko', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+/* Custom Chamfered Tech Outlines */
+.clip-chamfer-btn {
+  clip-path: polygon(
+    14px 0%, 
+    100% 0%, 
+    100% calc(100% - 14px), 
+    calc(100% - 14px) 100%, 
+    0% 100%, 
+    0% 14px
+  );
+}
+
+.clip-chamfer-panel {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% 100%,
+    14px 100%,
+    0 calc(100% - 14px)
+  );
+}
+
+/* Futuristic Scanline Effect */
+.scanline {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.3)
+  );
+  background-size: 100% 4px;
+}
+
+/* Crimson Glow Utilities */
+.text-glow-crimson {
+  text-shadow: 0 0 20px rgba(208, 0, 22, 0.7), 0 0 40px rgba(208, 0, 22, 0.4);
+}
+
+.text-glow-subtle {
+  text-shadow: 0 0 10px rgba(241, 240, 237, 0.3);
+}
+
+.box-glow-crimson {
+  box-shadow: 0 0 25px -3px rgba(208, 0, 22, 0.45);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A0407;
+  border-radius: 3px;
+  border: 1px solid rgba(208, 0, 22, 0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D00016;
+}
