@@ -20,20 +20,17 @@ export default function CinematicStage() {
 
       // ================= 1. DESKTOP & STANDARD MOTION CHOREOGRAPHY =================
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        // Explicit initial states. Each incoming chapter starts slightly "pushed in"
-        // (scale 1.08) and settles to a razor-sharp 1.0 when it becomes the active
-        // chapter — so images are never upscaled/blurred at rest.
+        // Explicit initial states: razor-sharp 1:1 scale (no excessive zoom or blur)
         gsap.set(heroLayerRef.current, { opacity: 1, scale: 1 });
-        gsap.set(visionLayerRef.current, { opacity: 0, scale: 1.08 });
-        gsap.set(evolutionLayerRef.current, { opacity: 0, scale: 1.08 });
-        gsap.set(humanityLayerRef.current, { opacity: 0, scale: 1.08 });
-        gsap.set(perfectionLayerRef.current, { opacity: 0, scale: 1.08 });
+        gsap.set(visionLayerRef.current, { opacity: 0, scale: 1 });
+        gsap.set(evolutionLayerRef.current, { opacity: 0, scale: 1 });
+        gsap.set(humanityLayerRef.current, { opacity: 0, scale: 1 });
+        gsap.set(perfectionLayerRef.current, { opacity: 0, scale: 1 });
 
         // MASTER CONTINUOUS STORYTELLING TIMELINE (total length = 4; one unit per cut).
         // Each chapter rests crisp at integer times (0,1,2,3,4 == scroll 0/25/50/75/100%).
         // Transitions are SEQUENCED, not a flat cross-dissolve: the outgoing scene fades
-        // out first (and pushes in via scale) while the incoming scene settles in just
-        // after, so two busy images never sit at 50/50 and smear into a double-exposure.
+        // out cleanly while the incoming scene settles in, avoiding double-exposure.
         const masterTl = gsap.timeline({
           scrollTrigger: {
             trigger: document.body,
@@ -44,12 +41,10 @@ export default function CinematicStage() {
           }
         });
 
-        // Reusable chapter cut: outgoing recedes/fades early, incoming settles in late.
+        // Reusable chapter cut: outgoing fades early, incoming settles in cleanly
         const cut = (outRef, inRef, t) => {
           masterTl
             .to(outRef, { opacity: 0, duration: 0.5, ease: 'power2.in' }, t)
-            .to(outRef, { scale: 1.08, duration: 1.0, ease: 'power1.in' }, t)
-            .to(inRef, { scale: 1.0, duration: 1.0, ease: 'power2.out' }, t)
             .to(inRef, { opacity: 1, duration: 0.58, ease: 'power2.out' }, t + 0.42);
         };
 
@@ -139,7 +134,7 @@ export default function CinematicStage() {
         <img
           src="/assets/evolution_final.png"
           alt="NEXUS Cybernetic Evolution Commander in Ruined Megacity"
-          className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-[0.98]"
+          className="w-full h-full object-cover object-bottom filter contrast-[1.05] brightness-[0.98]"
         />
         {/* Subtle left gradient for typography readability */}
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#080808]/85 via-[#080808]/40 to-transparent w-full md:w-[55%]" />

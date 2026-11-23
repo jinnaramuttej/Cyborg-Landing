@@ -41,7 +41,7 @@ export default function Hero({ onExplore }) {
           duration: 0.8,
           ease: 'power2.out'
         }, '-=0.5')
-        .from(quoteRef.current, {
+        .from('.hero-quote-inner', {
           x: 25,
           opacity: 0,
           duration: 0.9,
@@ -49,21 +49,10 @@ export default function Hero({ onExplore }) {
         }, '-=0.6');
 
         // Scroll exit: subtle parallax glide up and fade out before Vision appears
-        gsap.to(contentRef.current, {
-          y: -60,
-          opacity: 0,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: 'top top',
-            end: '60% top',
-            scrub: 1
-          }
-        });
-
-        if (quoteRef.current) {
-          gsap.to(quoteRef.current, {
-            y: -40,
+        gsap.fromTo(contentRef.current, 
+          { y: 0, opacity: 1 },
+          {
+            y: -60,
             opacity: 0,
             ease: 'none',
             scrollTrigger: {
@@ -72,7 +61,24 @@ export default function Hero({ onExplore }) {
               end: '60% top',
               scrub: 1
             }
-          });
+          }
+        );
+
+        if (quoteRef.current) {
+          gsap.fromTo(quoteRef.current,
+            { y: 0, opacity: 1 },
+            {
+              y: -40,
+              opacity: 0,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: heroRef.current,
+                start: 'top top',
+                end: '60% top',
+                scrub: 1
+              }
+            }
+          );
         }
       });
 
@@ -150,7 +156,9 @@ export default function Hero({ onExplore }) {
 
         {/* ================= FAR RIGHT: VERTICAL DIALOGUE PANEL ================= */}
         <div ref={quoteRef} className="hidden lg:flex items-center justify-end z-30 ml-auto pl-4">
-          <QuotePanel />
+          <div className="hero-quote-inner">
+            <QuotePanel />
+          </div>
         </div>
 
       </div>
