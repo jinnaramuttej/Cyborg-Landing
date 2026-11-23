@@ -85,7 +85,7 @@ export default function EvolutionSection() {
 
           <p
             ref={paraRef}
-            className="text-base sm:text-lg font-mono text-[#999999] leading-relaxed max-w-md font-normal"
+            className="text-base sm:text-lg font-mono text-[#AAA8A4] leading-relaxed max-w-md font-normal drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]"
           >
             Organic tissue was merely an unoptimized prototype. NEXUS forges the permanent successor.
           </p>

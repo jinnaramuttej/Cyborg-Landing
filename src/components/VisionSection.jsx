@@ -85,7 +85,7 @@ export default function VisionSection() {
 
           <p
             ref={paraRef}
-            className="text-base sm:text-lg lg:text-xl font-mono text-[#999999] leading-relaxed max-w-lg font-normal"
+            className="text-base sm:text-lg lg:text-xl font-mono text-[#AAA8A4] leading-relaxed max-w-lg font-normal drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]"
           >
             Ten millennia of human discord erased in a single computational cycle.
           </p>

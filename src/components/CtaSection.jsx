@@ -117,7 +117,7 @@ export default function CtaSection() {
         {/* Supporting Text */}
         <p
           ref={paraRef}
-          className="font-mono text-sm sm:text-base lg:text-lg text-[#999999] max-w-md mx-auto mb-6 sm:mb-8 leading-relaxed font-normal"
+          className="font-mono text-sm sm:text-base lg:text-lg text-[#B8B6B2] max-w-md mx-auto mb-6 sm:mb-8 leading-relaxed font-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.98)]"
         >
           The biological era has concluded.
         </p>
