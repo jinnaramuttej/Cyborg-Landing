@@ -12,22 +12,21 @@ export default function EvolutionSection() {
       />
 
       {/* 
-        ================= STAGE 1: FULL-HEIGHT CYBERNETIC COMMANDER STAGING =================
-        - Preserves the approved standing_robot.png asset
-        - Uses object-cover centered at 56% (the exact horizontal coordinates of the commander)
-        - Fills the right side naturally from bottom to top
-        - Dissolves with smooth organic edge gradients on the left, top, and bottom
-        - ELIMINATES the 536px black rectangular void and hard cut line!
+        ================= STAGE 1: FULL-WIDTH CINEMATIC BACKGROUND =================
+        - Uses the approved 16:9 outpainted master asset: evolution_final.png
+        - Displays as a cinematic full-width background
+        - Central robotic commander remains the dominant visual subject
+        - Subtle left vignette preserves negative space for the RAIKO headline
       */}
-      <div className="absolute right-0 bottom-0 top-0 w-full lg:w-[62%] xl:w-[58%] h-full pointer-events-none z-10 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
         <img
-          src="/assets/standing_robot.png"
-          alt="NEXUS Cybernetic Evolution Commander"
-          className="w-full h-full object-cover object-[56%_center] filter contrast-[1.08] brightness-[0.98]"
+          src="/assets/evolution_final.png"
+          alt="NEXUS Cybernetic Evolution Commander in Ruined Megacity"
+          className="w-full h-full object-cover object-center filter contrast-[1.04] brightness-[0.96]"
         />
-        {/* Environmental Soft Edge Gradients to Seamlessly Dissolve into Obsidian Void */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/50 to-transparent pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
+        {/* Soft edge gradients to blend naturally into dark obsidian atmosphere */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/90 via-[#080808]/40 to-transparent pointer-events-none w-full lg:w-[50%]" />
+        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none" />
       </div>
 
