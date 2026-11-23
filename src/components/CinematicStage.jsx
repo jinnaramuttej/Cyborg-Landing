@@ -243,41 +243,46 @@ export default function CinematicStage() {
             WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%)'
           }}
         />
-
-        {/* Luminous Red Energy Halo behind character */}
-        <div 
-          ref={haloRef}
-          className="absolute right-[8%] sm:right-[14%] lg:right-[18%] xl:right-[20%] top-[43%] -translate-y-1/2 w-[300px] sm:w-[420px] md:w-[480px] lg:w-[540px] h-[300px] sm:h-[420px] md:h-[480px] lg:h-[540px] rounded-full pointer-events-none"
-          style={{
-            border: '1.5px solid rgba(208, 0, 22, 0.45)',
-            boxShadow: '0 0 35px rgba(208, 0, 22, 0.35), inset 0 0 25px rgba(208, 0, 22, 0.15)',
-            background: 'radial-gradient(circle, rgba(208,0,22,0.08) 0%, rgba(208,0,22,0.01) 60%, transparent 80%)'
-          }}
-        />
-
-        {/* Atmospheric Red Fog Glow */}
-        <div 
-          ref={fogRef}
-          className="absolute right-[10%] lg:right-[18%] top-[45%] -translate-y-1/2 w-[450px] sm:w-[600px] lg:w-[750px] h-[450px] sm:h-[600px] lg:h-[750px] rounded-full pointer-events-none filter blur-[100px] opacity-25"
-          style={{
-            background: 'radial-gradient(circle, #D00016 0%, rgba(140,0,16,0.4) 45%, transparent 70%)'
-          }}
-        />
       </div>
 
-      {/* FOREGROUND HERO CYBORG (PULLS BACK AND DISSOLVES INTO VISION METROPOLIS) */}
+      {/* FOREGROUND HERO CYBORG WITH PERFECTLY CENTERED HALO CIRCLE */}
       <div
         ref={heroCharRef}
         className="absolute right-0 bottom-0 top-0 w-full sm:w-[75%] md:w-[62%] lg:w-[54%] xl:w-[50%] h-full flex items-end justify-center pointer-events-none z-10 will-change-transform"
       >
-        <picture className="h-full w-full max-h-[77vh] flex items-end justify-center">
-          <source srcSet="/assets/nexus_hero_character_master.png" type="image/png" />
-          <img
-            src="/assets/nexus_hero_character_master.png"
-            alt="NEXUS Cybernetic Humanoid Hero Character"
-            className="h-full w-auto max-h-[77vh] object-contain object-bottom filter contrast-[1.08] brightness-[1.0] drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
+        <div className="relative h-full max-h-[77vh] flex items-end justify-center">
+          
+          {/* Luminous Red Energy Halo — Centered Directly on Ultron */}
+          <div 
+            ref={haloRef}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[460px] md:w-[520px] lg:w-[580px] h-[340px] sm:h-[460px] md:h-[520px] lg:h-[580px] rounded-full pointer-events-none z-0"
+            style={{
+              border: '1.5px solid rgba(208, 0, 22, 0.45)',
+              boxShadow: '0 0 40px rgba(208, 0, 22, 0.4), inset 0 0 30px rgba(208, 0, 22, 0.18)',
+              background: 'radial-gradient(circle, rgba(208,0,22,0.1) 0%, rgba(208,0,22,0.015) 60%, transparent 80%)'
+            }}
           />
-        </picture>
+
+          {/* Atmospheric Red Fog Glow — Centered Directly on Ultron */}
+          <div 
+            ref={fogRef}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] sm:w-[600px] lg:w-[750px] h-[450px] sm:h-[600px] lg:h-[750px] rounded-full pointer-events-none filter blur-[100px] opacity-30 z-0"
+            style={{
+              background: 'radial-gradient(circle, #D00016 0%, rgba(140,0,16,0.4) 45%, transparent 70%)'
+            }}
+          />
+
+          {/* Ultron Cyborg Cutout */}
+          <picture className="relative h-full w-full max-h-[77vh] flex items-end justify-center z-10">
+            <source srcSet="/assets/nexus_hero_character_master.png" type="image/png" />
+            <img
+              src="/assets/nexus_hero_character_master.png"
+              alt="NEXUS Cybernetic Humanoid Hero Character"
+              className="h-full w-auto max-h-[77vh] object-contain object-bottom filter contrast-[1.08] brightness-[1.0] drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
+            />
+          </picture>
+
+        </div>
       </div>
 
       {/* ================= PERSISTENT CINEMATIC VIGNETTE & FILM GRADE ================= */}
