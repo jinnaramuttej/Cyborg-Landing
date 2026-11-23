@@ -1,11 +1,81 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function CtaSection() {
+  const sectionRef = useRef(null);
+  const tagRef = useRef(null);
+  const headlineRef = useRef(null);
+  const paraRef = useRef(null);
+  const ctaBtnRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 65%',
+            end: 'bottom 10%',
+            toggleActions: 'play reverse play reverse'
+          }
+        });
+
+        tl.fromTo(tagRef.current,
+          { y: -10, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }
+        )
+        .fromTo('.perfection-word',
+          { yPercent: 100, opacity: 0, scale: 0.94 },
+          { yPercent: 0, opacity: 1, scale: 1, duration: 0.9, stagger: 0.15, ease: 'power3.out' },
+          '-=0.3'
+        )
+        .fromTo(paraRef.current,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out' },
+          '-=0.4'
+        )
+        .fromTo(ctaBtnRef.current,
+          { y: 20, scale: 0.95, opacity: 0 },
+          { y: 0, scale: 1, opacity: 1, duration: 0.8, ease: 'power2.out' },
+          '-=0.3'
+        );
+
+        // Continuous subtle pulse on CTA button
+        if (ctaBtnRef.current) {
+          gsap.to(ctaBtnRef.current, {
+            boxShadow: '0 0 50px rgba(208, 0, 22, 0.75)',
+            duration: 2.2,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+          });
+        }
+      });
+
+      mm.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set([tagRef.current, '.perfection-word', paraRef.current, ctaBtnRef.current], {
+          opacity: 1,
+          y: 0,
+          scale: 1
+        });
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="perfection" className="relative w-full h-screen min-h-[850px] overflow-hidden flex flex-col justify-between select-none z-10 bg-transparent">
-      
+    <section 
+      id="perfection" 
+      ref={sectionRef}
+      className="relative w-full h-screen min-h-[750px] overflow-hidden flex flex-col justify-between select-none z-10 bg-transparent"
+    >
       {/* Background Subtle Ambient Glow */}
       <div 
         className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[180px] opacity-20 pointer-events-none"
@@ -13,14 +83,11 @@ export default function CtaSection() {
       />
 
       {/* ================= UPPER-CANVAS FINALE TYPOGRAPHY ================= */}
-      <div className="relative max-w-4xl mx-auto px-6 sm:px-12 text-center z-20 w-full pt-20 sm:pt-24 lg:pt-28">
+      <div className="relative max-w-4xl mx-auto px-6 sm:px-12 text-center z-20 w-full pt-12 sm:pt-16 lg:pt-20">
         
         {/* Category Tag */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
+          ref={tagRef}
           className="flex items-center justify-center gap-2 font-mono text-xs tracking-[0.25em] mb-3 uppercase select-none"
         >
           <span className="text-[#D00016] font-bold">[</span>
@@ -28,42 +95,35 @@ export default function CtaSection() {
           <span className="text-[#D00016]">/</span>
           <span className="text-[#D00016] font-bold">05</span>
           <span className="text-[#D00016] font-bold">]</span>
-        </motion.div>
+        </div>
 
         {/* Normalized RAIKO Finale Headline (~58-64px on desktop) */}
-        <motion.h2
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          className="hero-headline text-3xl sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] leading-[0.92] tracking-tight mb-4 font-raiko"
+        <h2
+          ref={headlineRef}
+          className="hero-headline text-3xl sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] leading-[0.92] tracking-tight mb-4 font-raiko overflow-hidden"
         >
-          <span className="text-[#F1F0ED] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
-            THE AGE
+          <span className="inline-block overflow-hidden mr-3">
+            <span className="perfection-word inline-block text-[#F1F0ED] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+              THE AGE
+            </span>
           </span>
-          <span className="text-[#D00016] text-glow-crimson font-black tracking-tight">
-            OF PERFECTION.
+          <span className="inline-block overflow-hidden">
+            <span className="perfection-word inline-block text-[#D00016] text-glow-crimson font-black tracking-tight">
+              OF PERFECTION.
+            </span>
           </span>
-        </motion.h2>
+        </h2>
 
         {/* Supporting Text */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.15 }}
+        <p
+          ref={paraRef}
           className="font-mono text-sm sm:text-base lg:text-lg text-[#999999] max-w-md mx-auto mb-6 sm:mb-8 leading-relaxed font-normal"
         >
           The biological era has concluded.
-        </motion.p>
+        </p>
 
         {/* Single Prominent Finale CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-        >
+        <div ref={ctaBtnRef} className="inline-block">
           <a
             href="#vision"
             className="group inline-flex items-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 border-2 border-[#D00016] bg-[#D00016]/20 text-[#F1F0ED] font-raiko text-xs sm:text-sm font-extrabold tracking-[0.22em] uppercase rounded-full shadow-[0_0_35px_rgba(208,0,22,0.5)] hover:bg-[#D00016] hover:shadow-[0_0_60px_rgba(208,0,22,0.9)] hover:text-white hover:scale-[1.03] transition-all duration-300"
@@ -71,11 +131,11 @@ export default function CtaSection() {
             <span>ENTER THE NEW WORLD</span>
             <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 text-[#D00016] group-hover:text-white group-hover:translate-x-1.5 transition-all duration-200" />
           </a>
-        </motion.div>
+        </div>
 
       </div>
 
-      <div className="w-full h-12" />
+      <div className="w-full h-8" />
     </section>
   );
 }
