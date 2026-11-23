@@ -3,27 +3,10 @@ import { motion } from 'framer-motion';
 
 export default function VisionSection() {
   return (
-    <section id="vision" className="relative w-full h-screen min-h-[850px] bg-[#080808] overflow-hidden flex items-center justify-start select-none">
+    <section id="vision" className="relative w-full h-screen min-h-[850px] overflow-hidden flex items-center justify-start select-none z-10 bg-transparent">
       
-      {/* ================= FULL-WIDTH CINEMATIC BACKGROUND ================= */}
-      {/* Megacity image rendered crisp with natural brightness */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center pointer-events-none filter contrast-105 brightness-95"
-        style={{ backgroundImage: `url('/assets/vision_city.png')` }}
-      />
-
-      {/* Localized Left Gradient strictly for text legibility, preserving the glowing portal and skyline */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse 65% 80% at 15% 50%, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.55) 55%, transparent 100%)'
-        }}
-      />
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
-
-      {/* ================= CONTENT LAYER DIRECTLY OVER IMAGE ================= */}
-      <div className="relative w-full max-w-[1740px] mx-auto px-6 sm:px-12 lg:px-20 xl:px-24 z-10">
+      {/* ================= CONTENT LAYER DIRECTLY OVER PERSISTENT STAGE ================= */}
+      <div className="relative w-full max-w-[1740px] mx-auto px-6 sm:px-12 lg:px-20 xl:px-24 z-20">
         
         <div className="max-w-xl">
           {/* Tech Category Tag */}
@@ -71,8 +54,6 @@ export default function VisionSection() {
 
       </div>
 
-      {/* Subtle Bottom Accent Line */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D00016]/30 to-transparent z-20" />
     </section>
   );
 }

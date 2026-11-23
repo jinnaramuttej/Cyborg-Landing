@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function CtaSection() {
   return (
-    <section id="perfection" className="relative w-full h-screen min-h-[850px] bg-[#080808] overflow-hidden flex flex-col justify-between select-none">
+    <section id="perfection" className="relative w-full h-screen min-h-[850px] overflow-hidden flex flex-col justify-between select-none z-10 bg-transparent">
       
       {/* Background Subtle Ambient Glow */}
       <div 
@@ -12,31 +12,7 @@ export default function CtaSection() {
         style={{ background: 'radial-gradient(circle, #D00016 0%, transparent 70%)' }}
       />
 
-      {/* ================= STAGE 1 & 2: PANORAMIC MARCHING ARMY STAGING ================= */}
-      {/* 
-        - Staged in true cinematic aspect ratio across the lower-center canvas
-        - 100% native resolution downscaled slightly (scale ~0.93x on 1080p, ZERO pixelation, 0% blur)
-        - Every single soldier across the panoramic formation is fully visible from left to right
-        - Seamless vertical smoke dissolves into #080808 void above and below
-      */}
-      <div className="absolute bottom-16 sm:bottom-20 left-0 right-0 w-full flex items-center justify-center pointer-events-none z-10 overflow-hidden">
-        <div className="relative w-full max-w-[2048px] px-2 sm:px-6">
-          <img
-            src="/assets/robot_army_perfection.png"
-            alt="NEXUS Legion of Perfection"
-            className="w-full h-auto max-h-[50vh] sm:max-h-[55vh] object-contain object-bottom filter contrast-[1.12] brightness-[0.94] drop-shadow-[0_20px_60px_rgba(208,0,22,0.4)]"
-          />
-          {/* Subtle atmospheric edge fading to dissolve into obsidian black */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/85 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-transparent to-[#080808] pointer-events-none" />
-        </div>
-      </div>
-
-      {/* Top Edge Vignette */}
-      <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none z-20" />
-
-      {/* ================= STAGE 2 & 3: UPPER-CANVAS FINALE TYPOGRAPHY ================= */}
-      {/* Positioned cleanly in the upper negative space, completely clearing the central robot commander */}
+      {/* ================= UPPER-CANVAS FINALE TYPOGRAPHY ================= */}
       <div className="relative max-w-4xl mx-auto px-6 sm:px-12 text-center z-20 w-full pt-20 sm:pt-24 lg:pt-28">
         
         {/* Category Tag */}
@@ -99,19 +75,7 @@ export default function CtaSection() {
 
       </div>
 
-      {/* ================= CINEMATIC MINIMAL FOOTER ================= */}
-      <div className="relative z-20 w-full max-w-[1740px] mx-auto px-6 sm:px-12 lg:px-20 pb-6 pt-3 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#999999] border-t border-white/10">
-        <div className="flex items-center gap-3">
-          <span className="font-raiko font-bold text-white tracking-widest text-sm">NEXUS</span>
-          <span>// © 2026 ARTIFICIAL INTELLIGENCE CORP. ALL RIGHTS RESERVED.</span>
-        </div>
-        <div className="flex items-center gap-8 mt-4 sm:mt-0 tracking-[0.2em]">
-          <a href="#vision" className="hover:text-[#D00016] transition-colors">THE VISION</a>
-          <a href="#evolution" className="hover:text-[#D00016] transition-colors">EVOLUTION</a>
-          <a href="#humanity" className="hover:text-[#D00016] transition-colors">HUMANITY</a>
-        </div>
-      </div>
-
+      <div className="w-full h-12" />
     </section>
   );
 }

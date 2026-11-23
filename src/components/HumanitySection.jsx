@@ -3,34 +3,10 @@ import { motion } from 'framer-motion';
 
 export default function HumanitySection() {
   return (
-    <section id="humanity" className="relative w-full h-screen min-h-[850px] bg-[#080808] overflow-hidden flex flex-col justify-between select-none py-16 sm:py-20 lg:py-24">
+    <section id="humanity" className="relative w-full h-screen min-h-[850px] overflow-hidden flex flex-col justify-between select-none py-16 sm:py-20 lg:py-24 z-10 bg-transparent">
       
-      {/* ================= PRIMARY FULL-SECTION CINEMATIC BACKGROUND ================= */}
-      {/* 
-        Approved 16:9 master asset: humanity_final.png
-        Preserves Elena Reyes (left) and Dr. Aaron Vance (right) in the same frame
-        Rendered with natural contrast, zero blurred patches, and zero horizontal seams
-      */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <img
-          src="/assets/humanity_final.png"
-          alt="Dr. Aaron Vance and Elena Reyes - Humanity Interaction"
-          className="w-full h-full object-cover object-center filter contrast-[1.04] brightness-[0.95]"
-        />
-        {/* Subtle upper ambient vignette for headline legibility in negative space */}
-        <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse 65% 50% at 20% 20%, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.3) 60%, transparent 100%)'
-          }}
-        />
-        <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
-      </div>
-
       {/* ================= UPPER SECTION: HEADLINE IN NEGATIVE SPACE ================= */}
-      {/* Positioned high in the upper-left negative space to completely clear Elena Reyes' head and profile */}
-      <div className="relative w-full max-w-[1740px] mx-auto px-6 sm:px-12 lg:px-20 xl:px-24 z-10 pt-4 sm:pt-6">
+      <div className="relative w-full max-w-[1740px] mx-auto px-6 sm:px-12 lg:px-20 xl:px-24 z-20 pt-4 sm:pt-6">
         
         <div className="max-w-xl">
           {/* Tech Category Tag */}
@@ -77,9 +53,8 @@ export default function HumanitySection() {
 
       </div>
 
-      {/* ================= LOWER SECTION: SUBTLE CINEMATIC SUBTITLES ================= */}
-      {/* Positioned across the bottom canvas as unboxed editorial subtitles, leaving the central interaction clear */}
-      <div className="relative w-full max-w-[1740px] mx-auto px-6 sm:px-12 lg:px-20 xl:px-24 z-10 pb-4 sm:pb-6">
+      {/* ================= LOWER SECTION: UNBOXED CINEMATIC SUBTITLES ================= */}
+      <div className="relative w-full max-w-[1740px] mx-auto px-6 sm:px-12 lg:px-20 xl:px-24 z-20 pb-4 sm:pb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl">
           
           {/* Dr. Aaron Vance Narrative */}
@@ -123,8 +98,6 @@ export default function HumanitySection() {
         </div>
       </div>
 
-      {/* Subtle Bottom Accent Line */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D00016]/30 to-transparent z-20" />
     </section>
   );
 }

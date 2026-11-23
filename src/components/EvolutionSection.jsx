@@ -3,34 +3,9 @@ import { motion } from 'framer-motion';
 
 export default function EvolutionSection() {
   return (
-    <section id="evolution" className="relative w-full h-screen min-h-[850px] bg-[#080808] overflow-hidden flex items-center justify-between select-none">
+    <section id="evolution" className="relative w-full h-screen min-h-[850px] overflow-hidden flex items-center justify-between select-none z-10 bg-transparent">
       
-      {/* Background Soft Crimson Glow */}
-      <div 
-        className="absolute right-[12%] top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] opacity-20 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #D00016 0%, transparent 70%)' }}
-      />
-
-      {/* 
-        ================= STAGE 1: FULL-WIDTH CINEMATIC BACKGROUND =================
-        - Uses the approved 16:9 outpainted master asset: evolution_final.png
-        - Displays as a cinematic full-width background
-        - Central robotic commander remains the dominant visual subject
-        - Subtle left vignette preserves negative space for the RAIKO headline
-      */}
-      <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
-        <img
-          src="/assets/evolution_final.png"
-          alt="NEXUS Cybernetic Evolution Commander in Ruined Megacity"
-          className="w-full h-full object-cover object-center filter contrast-[1.04] brightness-[0.96]"
-        />
-        {/* Soft edge gradients to blend naturally into dark obsidian atmosphere */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/90 via-[#080808]/40 to-transparent pointer-events-none w-full lg:w-[50%]" />
-        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
-        <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-[#080808] to-transparent pointer-events-none" />
-      </div>
-
-      {/* ================= TYPOGRAPHY LAYERED DIRECTLY OVER SCENE ================= */}
+      {/* ================= TYPOGRAPHY LAYERED DIRECTLY OVER PERSISTENT STAGE ================= */}
       <div className="relative w-full max-w-[1740px] mx-auto px-6 sm:px-12 lg:px-20 xl:px-24 z-20">
         
         <div className="max-w-xl">
@@ -78,8 +53,6 @@ export default function EvolutionSection() {
 
       </div>
 
-      {/* Horizon Bottom Edge */}
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D00016]/30 to-transparent z-20" />
     </section>
   );
 }
