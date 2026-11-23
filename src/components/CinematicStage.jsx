@@ -162,7 +162,7 @@ export default function CinematicStage() {
         <img
           src="/assets/hero_background_master.png"
           alt="NEXUS Cybernetic Humanoid in Luminous Red Energy Ring overlooking Crimson Megacity"
-          className="w-full h-full object-cover object-[72%_center] sm:object-center filter contrast-[1.05] brightness-[1.0]"
+          className="w-full h-full object-cover object-[54%_bottom] sm:object-bottom filter contrast-[1.05] brightness-[1.0]"
         />
         {/* Soft left gradient to ensure text legibility */}
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#080808]/85 via-[#080808]/45 to-transparent w-full md:w-[60%]" />
